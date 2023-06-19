@@ -1,0 +1,59 @@
+swagger: "2.0"
+info:
+  description: Starbucks API
+  version: "1.0.0"
+  title: Starbucks API Example
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api"
+
+# Paths supported by the server application
+paths:
+  /coffee:
+    get:
+      operationId: "coffee.read"
+      tags:
+        - "Coffee"
+      summary: "The coffee data structure for our server application"
+      description: "Read the list of coffee drinks"
+      responses:
+        200:
+          description: "Successful read coffee list operation"
+          schema:
+            type: "array"
+            items:
+              properties:
+                coffee_name:
+                  type: "string"
+                milk:
+                  type: "string"
+                timestamp:
+                  type: "string"
+    post:
+      operationId: coffee.create
+      tags:
+        - "Coffee"
+      summary: "Create a coffee drink and add it to the coffee list"
+      description: Create a new drink in the coffee list
+      parameters:
+        - name: coffee
+          in: body
+          description: Coffee to create
+          required: True
+          schema:
+            type: object
+            properties:
+              coffee_name:
+                type: "string"
+                description: "Name of drink"
+              milk:
+                type: "string"
+                description: "type of milk to use"
+      responses:
+        201:
+          description: Successfully created coffee drink in list
+
+    # STUDENT: Create a post route that updates the milk value
